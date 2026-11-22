@@ -4,15 +4,14 @@
 
 A reference architecture for a fictional regional e-wallet and payments platform (18 million users, Malaysia and Singapore). The design target is simple to state and hard to meet: **money must never be wrong, and must not be down on sale night.**
 
-![Architecture diagram](03-diagram/KitaPay-Azure-Architecture-Diagram.png)
+![Architecture diagram](02-diagram/KitaPay-Azure-Architecture-Diagram.png)
 
 ## What's in this repository
 
 | Folder | Contents |
 |---|---|
 | [`01-report/`](01-report) | 20-page PDF: scenario, NFRs, capacity math, component walkthrough, payment lifecycle, data architecture, 7 ADRs, resilience and DR runbook, security, cost and SLOs, senior↔junior design review, 7-day study guide |
-| [`02-linkedin/`](02-linkedin) | Post thumbnail (1200×627 and 2× versions) and ready-to-paste post copy |
-| [`03-diagram/`](03-diagram) | The architecture diagram as SVG (editable), PNG, and A3 PDF |
+| [`03-diagram/`](02-diagram) | The architecture diagram as SVG (editable), PNG, and A3 PDF |
 
 ## Design at a glance
 
@@ -36,14 +35,3 @@ Targets: 99.99% payment-auth availability · p99 ≤ 800 ms · 20,000 TPS design
 - **Open design decision:** Front Door Premium → API Management over Private Link is documented for v1 tiers only when APIM is *not* VNet-injected, so this design uses a private regional entry point in front of internal-mode APIM. Validate in a proof-of-concept.
 - **Identity caveat:** Entra External ID supports passkeys, but with limits when checked (not via native authentication APIs; registration needs an email/password account plus recent MFA). The design uses MFA as the baseline and treats passkeys as an enhancement to verify. Front Door routes by hostname, not JWT claims; APIM validates the `home_cell` claim.
 - This design supports the kind of evidence regulators ask for; it does not by itself make an organisation compliant with any specific rulebook.
-
-## Series
-
-A new enterprise architecture every week, alternating Azure and AWS.
-
-| Week | Cloud | Scenario |
-|---|---|---|
-| 01 | Azure | Regional digital wallet at 20,000 TPS |
-| 02 | AWS | *coming next* |
-
-*Author: add your name, LinkedIn and contact links here.*
